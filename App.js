@@ -1,20 +1,54 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, AppRegistry } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import LekScreen from './screens/LekScreen';
+import AnfScreen from './screens/AnfScreen';
+import ALec1Screen from './screens/ALec1Screen';
+import MusScreen from './screens/MusScreen';
+import MusITScreen from './screens/MusITScreen';
+import DictionaryScreen from './screens/DictionaryScreen';
+import GramScreen from './screens/GramScreen';
+import VocabularyScreen from './screens/VocabularyScreen';
+import { PaperProvider } from 'react-native-paper';
+import { name as appName } from './app.json';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-export default function App() {
+
+const Stack = createStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+   <GestureHandlerRootView style={{ flex: 1 }}>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Lektürephase" component={LekScreen} />
+        <Stack.Screen name="Anfangsunterricht" component={AnfScreen} />
+        <Stack.Screen name="Lectio prima" component={ALec1Screen} />
+        <Stack.Screen name="De mure et catto" component={MusScreen} />
+        <Stack.Screen name="Mus Rusticus et Urbanus" component={MusITScreen} />
+        <Stack.Screen name="Wörterbuch" component={DictionaryScreen} />
+        <Stack.Screen name="Vocabularium" component={VocabularyScreen} />
+        <Stack.Screen name="Grammatik" component={GramScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  </GestureHandlerRootView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function Main() {
+  return (
+    <PaperProvider>
+      <App />
+    </PaperProvider>
+  );
+}
+
+
+AppRegistry.registerComponent(appName, () => Main);
+
+
+
